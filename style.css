@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet');
+
+
+
+*{box-sizing: border-box;}
+
+body {
+    background: radial-gradient(circle at top, #534e4a 0, #ecb1a2 40%, #000 100%);
+    color: #f1f1f1;
+    font-family: 'Orbitron',sans-serif;
+    margin:0 ; padding:20px;
+    text-shadow: 0 0 6px #f0f;
+    overflow-x: hidden;
+    position: relative;
+}
+/* laser vertical*/
+body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ff004c, transparent);
+    opacity: 0.5;
+    pointer-events: none;
+    transform: translateY(-50%);
+    animation: scan 4s linear infinite;
+}
+
+/*lineas tipo CRT - monitores antiguos*/
+body::after{
+
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.03) 0px,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 2px,
+        transparent 3px
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.2;
+}
+
+body > * { /*hijo directo de body*/
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+/*tocando los estilos de la wb ya en si*/
+h1{
+    position: relative;
+    color: #ffc5e9;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 12px #ffa2d8, 0 0 24px #ff004c;
+    animation: neon-flicker 2.8s infinite alternate;
+}
+
+h1::before, h1::after{
+    content: attr(data-text);
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    text-shadow: none;
+    clip-path: inset(0 0 0 0);
+}
+
+h1::before{
+    left: 2px;
+    text-shadow: -2px 0 #ff00ff;
+    animation: glitch-1 2s infinite;
+}
+
+h1::after{
+    left: 2px;
+    text-shadow: -2px 0 #fffb00;
+    animation: glitch-1 1.6s infinite;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    /*
+    margin top 15
+    margin right 0
+    margin bottom 15
+    margin left 0
+    */
+}
+
+ul li {
+    margin: 10px 0;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(15, 0, 40, 0.9)), rgba(40, 0, 80, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 0, 255, 0.4);
+    box-shadow: 0 0 14px rgba(255, 0, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+ul li::after{
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -30%;
+    width: 60%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7), transparent 60%);
+    opacity: 0;
+    transform:  rotate (25deg);
+    transition: opacity 0.3s ease;
+}
+
+ul li:hover {
+    transform:  translateY(-2px) scale(1.01);
+    box-shadow: 0 0 22px rgba(255, 255, 255, 0.9);
+    border-color: hsl(64, 100%, 50%);
+}
+
+ul li:hover::after {
+    opacity: 0.7;
+    animation: sweep 0.6s linear;
+}
+
+a {
+    color: #001aff;
+    text-decoration: none;
+    font-weight: 700;
+    text-shadow: 0 0 6px #5900ff;
+    position: relative;
+    transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.1s ease;
+}
+
+a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #f0f, #fffb00);
+    box-shadow: 0 0 6px #ff00ff;
+    transition: width 0.25s ease;
+}
+
+
+
+a:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 8px #ff00ff, 0 0 14px #f0f;
+    transform: translateY(-1px);
+}
+
+a:hover::after {width: 100%;}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    opacity: 0.8;
+    font-size: 0.9em;
+    border-top: 1px solid rgb(255, 0, 170);
+    padding-top: 15px;
+    text-shadow: 0 0 6px #fffb00;
+}
+
+@keyframes scan {
+    0% {transform: translateY(-10%);}
+    100% {transform: translateY(110%);}
+}
+
+@keyframes sweep{
+    0% {transform: translateX(-150%) rotate(25deg); opacity:0;}
+    40% {opacity: 0.8;}
+    100% {transform: translateX(200%) rotate(25deg); opacity:0;}
+}
+
+@keyframes neon-flicker{
+ 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+        0 0 8px #00eaff,
+        0 0 16px #00eaff,
+        0 0 24px #00eaff,
+        0 0 40px #00eaff,
+ }
+ 20%, 24%, 55% {opacity: 0.3; text-shadow:none;}
+}
+
+@keyframes glitch-1{
+0% {
+    clip-path: inset(0 0 80% 0);
+    transform:  translate(0, 0 );
+}
+
+20% {
+    clip-path: inset(10% 0 60% 0);
+    transform:  translate(-2px, -1px);
+}
+
+40% {
+    clip-path: inset(40% 0 40% 0);
+    transform:  translate(2px, 1px);
+}
+
+60% {
+    clip-path: inset(80% 0 0 0);
+    transform:  translate(-1px, 2px);
+}
+
+80% {
+    clip-path: inset(0 0 80% 0);
+    transform:  translate(1px, -2px);
+}
+
+100% {
+    clip-path: inset(0 0 80% 0);
+    transform:  translate(0, 0);
+}
+
+}
+
+/*brillo suave*/
+@keyframes soft-glow {
+    0% {text-shadow: 0 0 8px #ff00ff; opacity: 0.8;}
+    100% {text-shadow: 0 0 18px #ff00ff, 0 0 30px #ff00ff; opacity: 1;}
+}
+
+/* responsive basico*/
+@media(max-width:600px){
+    body{padding: 12px;}
+    h1{font-size: 1.8rem;}
+    ul li{padding: 10px 12px;}
+}
+
+/*estilos propios de todolist*/
+.app-container{
+    background: rgba(5, 0, 20, 85);
+    border-radius: 16px;
+    padding: 20PX;
+    margin-top: 30PX;
+    border: 1px solid rgba(0, 234, 255, .3);
+    box-shadow: 0 0 22px rgba(255, 16, 96, 0.788);
+}
+
+form {
+    display: flex; /*de flexbox*/
+    gap: 10px; /*separacion o espacios, 10 px de espacio entre elementos entro del contenedor*/
+    margin-top: 16px;
+}
+
+input[type="text"]/*selector*/{
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 234, 255, .4);
+    background: rgba(5, 0, 30, .9);
+    color: #f1f1f1;
+    outline: none;
+    font-family: 'orbitron', sans-serif;
+}
+
+input[type="text"]::placeholder{color: rgba(241, 241, 241, .5);}
+
+button{
+    border: 1px solid rgba(0, 234, 255, .8);
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    background: radial-gradient(circle at top, #00eaff 0, #006b88 60%, #00141a 100%);
+    color: #000;
+    font-weight: 700;
+    text-shadow: 0 0 4px #00eaff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+    font-family: 'orbitron', sans-serif;
+}
+
+button:hover{
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 0 12px #00eaff;
+    background: radial-gradient(circle at top, #00ffff 0, #00a2ff 60%, #001c33 100%);
+
+}
+
+.todo-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.todoltitle{flex: 1;}
+
+.todo-title.completed{text-decoration: line-through; opacity: .6;}
+
+.todo-actions button{
+    margin-left: 4px;
+    padding: 6px 10px;
+    font-size: .8rem;
+}
+
+.todo-edit-input{
+    flex: 1;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 0, 255, .5);
+    background: rgba(15, 0, 40,.9);
+    color: #f1f1f1;
+    outline: none;
+    font-family: 'orbitron', sans-serif;
+}
+
+.error-message {
+    color: #ff4da6;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    text-shadow: 0 0 8px #ff4da6;
+}
+
+.empty-list {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 10px;
+}

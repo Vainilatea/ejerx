@@ -14,6 +14,7 @@ El puerto donde corre la aplicacion es el <b>3000</b>. En el caso de las URLs o 
 - GET-> mostramos los datos que se piden, tal cual, en la peticion
 ```htttp://localhost:3000/api/todos```
 - POST -> ocultamos "cifrando" la peticion
+4\.- implementamos el archivo```public/index.html```, es decir, el front  y por supuesTO EL CSS el cual vamos a crear en ```public/css/style.css``
 
 
 

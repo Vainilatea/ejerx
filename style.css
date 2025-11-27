@@ -103,7 +103,7 @@ ul {
 ul li {
     margin: 10px 0;
     padding: 12px 16px;
-    background: linear-gradient(135deg, rgba(15, 0, 40, 0.9)), rgba(40, 0, 80, 0.7);
+    background: linear-gradient(135deg, rgba(40, 0, 15, 0.9)), rgba(40, 0, 80, 0.7);
     border-radius: 10px;
     border: 1px solid rgba(255, 0, 255, 0.4);
     box-shadow: 0 0 14px rgba(255, 0, 255, 0.5);
@@ -276,22 +276,22 @@ input[type="text"]/*selector*/{
 input[type="text"]::placeholder{color: rgba(241, 241, 241, .5);}
 
 button{
-    border: 1px solid rgba(0, 234, 255, .8);
+    border: 2px solid rgba(243, 84, 137, 0.8);
     border-radius: 10px;
     padding: 8px;
     cursor: pointer;
-    background: radial-gradient(circle at top, #00eaff 0, #006b88 60%, #00141a 100%);
+    background: radial-gradient(circle at top, #ffb2b2 0, #f87ecf 60%, #00141a 100%);
     color: #000;
     font-weight: 700;
-    text-shadow: 0 0 4px #00eaff;
+    text-shadow: 0 0 4px #f57ec7;
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
     font-family: 'orbitron', sans-serif;
 }
 
 button:hover{
     transform: translateY(-1px) scale(1.02);
-    box-shadow: 0 0 12px #00eaff;
-    background: radial-gradient(circle at top, #00ffff 0, #00a2ff 60%, #001c33 100%);
+    box-shadow: 0 0 12px #ffd16f;
+    background: radial-gradient(circle at top, #ff9494 0, #ff008c 60%, #001c33 100%);
 
 }
 

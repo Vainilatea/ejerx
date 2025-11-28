@@ -15,6 +15,7 @@ El puerto donde corre la aplicacion es el <b>3000</b>. En el caso de las URLs o 
 ```htttp://localhost:3000/api/todos```
 - POST -> ocultamos "cifrando" la peticion
 4\.- implementamos el archivo```public/index.html```, es decir, el front  y por supuesTO EL CSS el cual vamos a crear en ```public/css/style.css``
+5\.- implementamos el archivo ```public/app.js```el cual tendra la logica del front, o lo que es lo mismo, todo lo relativo al funcionamiento de nuestra web/app
 
 
 

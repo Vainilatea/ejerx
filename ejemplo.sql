@@ -299,3 +299,30 @@ WHERE telefono LIKE '%[0-9+()- ]%'
 WHERE telefono LIKE '6_______'
    OR telefono LIKE '7_______'; 
 WHERE telefono LIKE '%-%-%'; -- si los metes con guiones
+
+--HASH: utilidades que podemos tener a mano:
+    --MDS: produce un valor de hash de 128-bit (es muy antiguo)
+    --SHA-1 (Secure Hash Algorithm):genera un hash de 160-bit (20 bytes)
+    --SHA2-256: regresa un valor de hash de 256-bits, o 64 digitos hexadecimales
+    --SHA3-256: variante con aplicabilidad equivalente al SHA-256
+--En MySQL, tiene disponible MDS y SHA-256
+--Principal uso para passwords, claves de acceso y demas --> columna --> password_hash VARCHAR(128) para SHA-512 y VARCHAR(64) si es SHA-256
+INSERT INTO users (username, password_hash)
+VALUES ('Diego', SHA2('mipasswordamazon', 256));
+
+--comparando un password ingresado
+SELECT * FROM users WHERE username = 'Diego'
+AND password_hash = SHA2('mipassowrdamazon',256);
+
+---------------
+
+INSERT INTO users (username,salt,password_hash)
+VALUES(
+    'Diego',
+    'abcd1234',
+    SHA2(CONCAT('abcd1234', 'passwordamazon'),256)
+);
+
+--ahora valida si tienes
+SELECT * FROM users WHERE username = 'Diego'
+AND password_hash = SHA2(CONCAT('abcd1234', 'passwordamazon'),256);

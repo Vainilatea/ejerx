@@ -196,3 +196,83 @@ SELECT nombre,
 FROM libro;
 
 -- funciones de conversion
+CAST() -- conversion de tipos -> SELECT CAST(10 AS CHAR);
+CONVERT() -- conversion flexible -> SELECT CONVERT('2024-01-01', DATE);
+
+--EJEMPLO INDIVIDUALIZADOS
+SELECT COUNT(*), SUM(precio), AVG(precio), MAX(precio), MIN(precio)
+FROM libro; --agregacion
+
+SELECT UPPER(nombre), LENGTH(nombre), SUBSTRING(nombre, 1, 3)
+FROM libro; --texto
+
+SELECT precio, ROUND(precio,1), CEIL(precio), MOD(stock,5)
+FROM libro; --matematicas
+
+SELECT fecha_publicacion,
+    YEAR(fecha_publicacion),
+    DATEDIFF(NOW(), fecha_publicacion)
+FROM libro; -- fechas
+
+SELECT nombre,
+    IF(stock>0, 'Disponible', 'Agotado'),
+    CASE WHEN precio>30 THEN 'Caro' ELSE 'Economico' END
+FROM libro; -- logicas
+
+SELECT CAST(stock AS CHAR), CONVERT(precio, DECIMAL(10,2))
+FROM libro; --conversion
+
+--OPERADORES PATRONES Y FUNCIONES DE LIKE (SQL)
+-- Operador LIKE se utiliza para comprar cadenas contra un RegExp (expresion regular)
+...columna LIKE 'Patrón'...
+-- % - cualquier numero de caracteres
+nombre LIKE 'A%'--> empieza con A
+nombre LIKE '%A'--> finaliza con A
+nombre LIKE '%an%'--> contiene 'an'
+
+--_un solo caracter
+codigo LIKE 'A_1' --> A + 1 caracter + 1
+
+-- conjuntos y rangos (solo en SQL Server, PostgresSQL y SQLite)
+-- En MySQL NO funciona; usar REGEXP
+
+--cualquiera de esos caracteres
+nombre LIKE '[abc]%' --empieza con a, b, o c
+-- rango d eletras
+nombre LIKE '[A-Z]%' --empieza con mayuscula
+-- NO esta en el rango
+nombre LIKE '[^0-9]%' --NO empieza con numero
+--negacion de LIKE
+columna NOT LIKE '%texto%'
+
+-- escape de caractereres especiales: si necesitas buscar un %, _ o [ ], debes escapar --
+-->para MySQL Server
+columna LIKE '%[%]%' -- busca corchetes
+
+-->para MySQL y PostgreSQL
+columna LIKE '%\%%' ESCAPE '\'; -- busca signo %
+
+-- alternativas mas potentes que LIKE
+MySQL -> REGEXP
+PostgreSQL -> ~ y ~*
+SQL Server -> LIKE + PATINDEX
+SQLite -> REGEXP (si esta activado)
+
+--Ejemplo a lo bruto
+SELECT id_socio, nombre, email
+FROM socio
+WHERE email REGEXP '^[a-z0-9._%-]+@gmail.com$'; 
+
+/*
+^-> iniciamos la REGEXP
+[a-z0-9._%-] -> nombre email con letras numeros guiones y puntos
+@gmail.com -> dominio excato del email
+$-> fin de la cadena
+*/
+
+-- funciones relacionadas que suelen usarse con LIKE
+SELECT * FROM libros WHERE LOWER(nombre) LIKE LOWER('%Garcia%') --busquedas sin distinguir
+SELECT * FROM libros WHERE RTRIM(nombre) LIKE 'Juan%' -- limpiar espacios derecha
+SELECT * FROM libros WHERE LTRIM(nombre) LIKE 'Juan%' -- limpiar espacios izquierda
+SELECT * FROM libros WHERE email LIKE CONCAT('%', 'gmail', '%') --concatenar patrones
+

@@ -276,3 +276,26 @@ SELECT * FROM libros WHERE RTRIM(nombre) LIKE 'Juan%' -- limpiar espacios derech
 SELECT * FROM libros WHERE LTRIM(nombre) LIKE 'Juan%' -- limpiar espacios izquierda
 SELECT * FROM libros WHERE email LIKE CONCAT('%', 'gmail', '%') --concatenar patrones
 
+-- ejemplos utiles (de todo un poco)--
+SELECT * FROM socio WHERE email LIKE '%@gmail.com'; --buscar correos de dominio gmail
+SELECT * FROM socio WHERE telefono LIKE '645-___-___'; --buscar numeros telefonicos con un patron
+-- buscar todos los telefonos que tengan codigo de pais (+XX...)
+SELECT telefono FROM contactos
+
+WHERE telefono LIKE '+%'; -- empieza por +loquesea
+WHERE telefono LIKE '+__ %' ; --exactamente 2 digitos
+WHERE telefono LIKE '+__%' OR telefono LIKE '+___%'; --para LATAM Y europa
+--para codigos de provincias, condados, estados, sectores o areas, municipios
+WHERE telefono LIKE '(___)%'; --contienen codigo de area
+WHERE telefono LIKE '(925)%' OR telefono LIKE '925-%' OR telefono LIKE '925 %'; -- area especifica
+--para numeros mas locales
+WHERE telefono LIKE '%23'; --que termine en 23
+WHERE telefono LIKE '23%'; --que empiece en 23
+WHERE telefono LIKE '6%'; --para telefonia movil
+WHERE telefono LIKE '%_______'; --con 7 digitos exactos
+--todos los telefonos validos (solo numeros, espacios y signos basicos)
+WHERE telefono LIKE '%[0-9+()- ]%'
+--todos los moviles
+WHERE telefono LIKE '6_______'
+   OR telefono LIKE '7_______'; 
+WHERE telefono LIKE '%-%-%'; -- si los metes con guiones
